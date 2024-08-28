@@ -5,7 +5,7 @@ import os
 from openai import OpenAI
 from datetime import datetime
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="your-api-key-here")
 
 
 # Function to save batch info to a file

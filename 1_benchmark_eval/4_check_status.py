@@ -3,7 +3,7 @@ from openai import OpenAI
 from pprint import pprint
 
 # Initialize the OpenAI client
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="your-api-key-here")
 
 # Retrieve the list of 4 most recent batches
 batches_list = client.batches.list(limit=4)  # most recent 4 batches

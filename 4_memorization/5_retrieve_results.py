@@ -3,7 +3,7 @@ import os
 import re
 
 # Set up OpenAI API credentials
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="your-api-key-here")
 
 # Directory paths
 input_dir = "uploaded_batch_ids"

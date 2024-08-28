@@ -6,7 +6,7 @@ from openai import OpenAI
 from datetime import datetime
 
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="your-api-key-here")
 
 
 def save_batch_info(batch_obj, file):
