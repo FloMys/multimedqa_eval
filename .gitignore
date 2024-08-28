@@ -12,3 +12,7 @@
 
 # Ignore JSONL files
 *.jsonl
+
+# Ignore plot scripts for the presentation
+5_presentation_plots/
+
