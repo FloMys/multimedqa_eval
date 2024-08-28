@@ -13,7 +13,7 @@ output_dir = "downloaded_batch_outputs"
 os.makedirs(output_dir, exist_ok=True)
 
 # Read the list of txt files from the provided file
-txt_files = ["batch_info_calibration_0shot_GPT4o_20240710_134040.txt"]
+txt_files = ["batch_info_MultiMedQA_memorization_GPT4o.jsonl.txt"]
 
 for txt_file in txt_files:
     txt_file_path = os.path.join(input_dir, txt_file)
@@ -32,8 +32,7 @@ for txt_file in txt_files:
             continue
         batch_id = batch_id_match.group(1)
 
-    # Extract information for the output filename
-    prompt_type, model, timestamp = re.match(r'batch_info_(\w+)_(\w+)_(\d+_\d+)\.txt', txt_file).groups()
+    save_name = (txt_file.replace(".txt", "")).replace(".jsonl", "")
 
     try:
         # Retrieve the batch information
@@ -45,7 +44,7 @@ for txt_file in txt_files:
             # Retrieve and save the output file
             if batch.output_file_id:
                 output_content = client.files.content(batch.output_file_id)
-                output_filename = f"{prompt_type}_{model}_{timestamp}_output.jsonl"
+                output_filename = f"{save_name}_output.jsonl"
                 output_path = os.path.join(output_dir, output_filename)
                 with open(output_path, "wb") as output_file:
                     output_file.write(output_content.content)
@@ -54,7 +53,7 @@ for txt_file in txt_files:
             # Retrieve and save the error file if it exists
             if batch.error_file_id:
                 error_content = client.files.content(batch.error_file_id)
-                error_filename = f"{prompt_type}_{model}_{timestamp}_errors.jsonl"
+                error_filename = f"{save_name}_errors.jsonl"
                 error_path = os.path.join(output_dir, error_filename)
                 with open(error_path, "wb") as error_file:
                     error_file.write(error_content.content)

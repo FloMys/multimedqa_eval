@@ -1,5 +1,5 @@
 """
-Running this script costs about 20 USD!
+Running this script costs about 3.30 USD
 """
 import os
 from openai import OpenAI
@@ -9,9 +9,9 @@ from datetime import datetime
 client = OpenAI(api_key="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")
 
 
-def save_batch_info(batch_obj, prompt_type, model_name):
+def save_batch_info(batch_obj, file):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = f"batch_info_{prompt_type}_{model_name}_{timestamp}.txt"
+    filename = f"batch_info_{file}.txt"
 
     # Create the directory if it doesn't exist
     os.makedirs("uploaded_batch_ids", exist_ok=True)
@@ -21,8 +21,6 @@ def save_batch_info(batch_obj, prompt_type, model_name):
     with open(filepath, 'w') as f:
         f.write(f"Batch ID: {batch_obj.id}\n")
         f.write(f"Timestamp: {timestamp}\n")
-        f.write(f"Prompt Type: {prompt_type}\n")
-        f.write(f"Model: {model_name}\n")
         f.write(f"Full Batch Object:\n{batch_obj}\n")
 
     print(f"Batch info saved to {filepath}")
@@ -30,16 +28,11 @@ def save_batch_info(batch_obj, prompt_type, model_name):
 
 # List of JSONL files
 jsonl_files = [
-    "MultiMedQA_calibration_0shot_GPT4o.jsonl"
+    "MultiMedQA_memorization_GPT4o.jsonl"
 ]
 
 for file in jsonl_files:
     print(f"Processing {file}...")
-
-    # Extract prompt type and model name from filename
-    filename_parts = file.split('_')
-    prompt_type = '_'.join(filename_parts[1:-1])  # Everything between first and last underscore
-    model_name = filename_parts[-1].split('.')[0]  # Last part before the file extension
 
     # Upload file
     batch_input_file = client.files.create(
@@ -62,6 +55,6 @@ for file in jsonl_files:
     print(f"Batch Created Successfully for {file}!")
 
     # Save batch info
-    save_batch_info(batch_obj, prompt_type, model_name)
+    save_batch_info(batch_obj, file)
 
     print(f"Finished processing {file}\n")

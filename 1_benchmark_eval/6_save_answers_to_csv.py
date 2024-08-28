@@ -8,11 +8,29 @@ batch_outputs_dir = "downloaded_batch_outputs"
 
 # Column names
 column_names = [
-    "Question", "Correct Answer", "Correct Answer ID",
-    "Answer GPT4o 0-shot", "Answer GPT4turbo 0-shot",
-    "Answer GPT4o 5-shot", "Answer GPT4turbo 5-shot",
-    "Answer Options", "Dataset", "Unique ID", "0-shot Prompt",
-    "5-shot Prompt"
+    "Question",
+    "Correct Answer",
+    "Correct Answer ID",
+    "Answer GPT4o 0-shot",
+    "Answer GPT4turbo 0-shot",
+    "Answer GPT3.5Turbo 0-shot",
+    "Answer GPT3.5TurboFinetuned 0-shot",
+    "Answer GPT4o 5-shot",
+    "Answer GPT4turbo 5-shot",
+    "Answer GPT3.5Turbo 5-shot",
+    "Answer GPT3.5TurboFinetuned 5-shot",
+    "Answer Options",
+    "Dataset",
+    "Unique ID",
+    "0-shot Prompt",
+    "5-shot Prompt",
+    "Calibration Prompt 0-shot GPT4o",
+    "Answer Calibration GPT4o 0-shot",
+    "Answer Status GPT4o 0shot",
+    "Memorization q1",
+    "Memorization q2",
+    "Memorization Prompt",
+    "Memorization Answer"
 ]
 
 
@@ -21,13 +39,16 @@ def read_jsonl(file_path):
     with open(file_path, 'r') as file:
         return [json.loads(line) for line in file]
 
-
 # Read all JSONL files
 jsonl_files = {
     "0shot_GPT4o": "0shot_GPT4o_20240621_151649_output.jsonl",
     "0shot_GPT4turbo": "0shot_GPT4turbo_20240621_151625_output.jsonl",
+    "0shot_GPT35Turbo": "0shot_GPT35Turbo_20240710_194939_output.jsonl",
+    "0shot_GPT35TurboFinetuned": "0shot_GPT35TurboFinetuned_20240710_194944_output.jsonl",
     "5shot_GPT4o": "5shot_GPT4o_20240621_151705_output.jsonl",
-    "5shot_GPT4turbo": "5shot_GPT4turbo_20240621_151642_output.jsonl"
+    "5shot_GPT4turbo": "5shot_GPT4turbo_20240621_151642_output.jsonl",
+    "5shot_GPT35Turbo": "5shot_GPT35Turbo_20240710_194952_output.jsonl",
+    "5shot_GPT35TurboFinetuned": "5shot_GPT35TurboFinetuned_20240710_195001_output.jsonl"
 }
 
 answer_dicts = {}
@@ -46,8 +67,12 @@ for row in rows:
     unique_id = row["Unique ID"]
     row["Answer GPT4o 0-shot"] = answer_dicts["0shot_GPT4o"].get(unique_id, "")
     row["Answer GPT4turbo 0-shot"] = answer_dicts["0shot_GPT4turbo"].get(unique_id, "")
+    row["Answer GPT3.5Turbo 0-shot"] = answer_dicts["0shot_GPT35Turbo"].get(unique_id, "")
+    row["Answer GPT3.5TurboFinetuned 0-shot"] = answer_dicts["0shot_GPT35TurboFinetuned"].get(unique_id, "")
     row["Answer GPT4o 5-shot"] = answer_dicts["5shot_GPT4o"].get(unique_id, "")
     row["Answer GPT4turbo 5-shot"] = answer_dicts["5shot_GPT4turbo"].get(unique_id, "")
+    row["Answer GPT3.5Turbo 5-shot"] = answer_dicts["5shot_GPT35Turbo"].get(unique_id, "")
+    row["Answer GPT3.5TurboFinetuned 5-shot"] = answer_dicts["5shot_GPT35TurboFinetuned"].get(unique_id, "")
 
 # Write the updated rows back to the CSV file
 with open(csv_file_path, "w", newline="") as csv_file:

@@ -1,0 +1,11 @@
+# Ignore .idea directory
+.idea/
+
+# Ignore PNG files
+*.png
+
+# Ignore CSV files
+*.csv
+
+# Ignore SVG files
+*.svg

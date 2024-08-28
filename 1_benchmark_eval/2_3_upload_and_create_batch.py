@@ -7,7 +7,7 @@ from datetime import datetime
 
 client = OpenAI(api_key="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")
 
-# TODO: add file path to "batches_to_upload" dir
+
 # Function to save batch info to a file
 def save_batch_info(batch_obj, prompt_type, model_name):
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -30,11 +30,14 @@ def save_batch_info(batch_obj, prompt_type, model_name):
 
 # List of JSONL files
 jsonl_files = [
-    "MultiMedQA_0shot_GPT4turbo.jsonl",
-    "MultiMedQA_5shot_GPT4turbo.jsonl",
-    "MultiMedQA_0shot_GPT4o.jsonl",
-    "MultiMedQA_5shot_GPT4o.jsonl",
-    "MultiMedQA_calibration_0shot_GPT4o.jsonl"
+    "MultiMedQA_0shot_GPT3.5turbo.jsonl",
+    "MultiMedQA_0shot_GPT3.5turbo_finetuned.jsonl",
+    # "MultiMedQA_0shot_GPT4o.jsonl",
+    # "MultiMedQA_0shot_GPT4turbo.jsonl",
+    "MultiMedQA_5shot_GPT3.5turbo.jsonl",
+    "MultiMedQA_5shot_GPT3.5turbo_finetuned.jsonl",
+    # "MultiMedQA_5shot_GPT4o.jsonl",
+    # "MultiMedQA_5shot_GPT4turbo.jsonl"
 ]
 
 for file in jsonl_files:
@@ -47,7 +50,7 @@ for file in jsonl_files:
 
     # Upload file
     batch_input_file = client.files.create(
-        file=open(file, "rb"),
+        file=open("batches_to_upload/" + file, "rb"),
         purpose="batch"
     )
 

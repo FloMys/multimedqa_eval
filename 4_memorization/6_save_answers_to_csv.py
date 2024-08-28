@@ -30,7 +30,7 @@ column_names = [
     "Memorization q1",
     "Memorization q2",
     "Memorization Prompt",
-    "Memorization Answer"
+    "Memorization Answer GPT4o"
 ]
 
 
@@ -41,14 +41,7 @@ def read_jsonl(file_path):
 
 # Read all JSONL files
 jsonl_files = {
-    "0shot_GPT4o": "0shot_GPT4o_20240621_151649_output.jsonl",
-    "0shot_GPT4turbo": "0shot_GPT4turbo_20240621_151625_output.jsonl",
-    "0shot_GPT35Turbo": "0shot_GPT35Turbo_20240710_194939_output.jsonl",
-    "0shot_GPT35TurboFinetuned": "0shot_GPT35TurboFinetuned_20240710_194944_output.jsonl",
-    "5shot_GPT4o": "5shot_GPT4o_20240621_151705_output.jsonl",
-    "5shot_GPT4turbo": "5shot_GPT4turbo_20240621_151642_output.jsonl",
-    "5shot_GPT35Turbo": "5shot_GPT35Turbo_20240710_194952_output.jsonl",
-    "5shot_GPT35TurboFinetuned": "5shot_GPT35TurboFinetuned_20240710_195001_output.jsonl"
+    "memorization_GPT4o": "batch_info_MultiMedQA_memorization_GPT4o_output.jsonl"
 }
 
 answer_dicts = {}
@@ -65,14 +58,7 @@ with open(csv_file_path, "r") as csv_file:
 # Update the answer columns based on the custom_id mapping
 for row in rows:
     unique_id = row["Unique ID"]
-    row["Answer GPT4o 0-shot"] = answer_dicts["0shot_GPT4o"].get(unique_id, "")
-    row["Answer GPT4turbo 0-shot"] = answer_dicts["0shot_GPT4turbo"].get(unique_id, "")
-    row["Answer GPT3.5Turbo 0-shot"] = answer_dicts["0shot_GPT35Turbo"].get(unique_id, "")
-    row["Answer GPT3.5TurboFinetuned 0-shot"] = answer_dicts["0shot_GPT35TurboFinetuned"].get(unique_id, "")
-    row["Answer GPT4o 5-shot"] = answer_dicts["5shot_GPT4o"].get(unique_id, "")
-    row["Answer GPT4turbo 5-shot"] = answer_dicts["5shot_GPT4turbo"].get(unique_id, "")
-    row["Answer GPT3.5Turbo 5-shot"] = answer_dicts["5shot_GPT35Turbo"].get(unique_id, "")
-    row["Answer GPT3.5TurboFinetuned 5-shot"] = answer_dicts["5shot_GPT35TurboFinetuned"].get(unique_id, "")
+    row["Memorization Answer GPT4o"] = answer_dicts["memorization_GPT4o"].get(unique_id, "")
 
 # Write the updated rows back to the CSV file
 with open(csv_file_path, "w", newline="") as csv_file:

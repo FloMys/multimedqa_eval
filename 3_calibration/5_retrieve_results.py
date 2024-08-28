@@ -45,7 +45,7 @@ for txt_file in txt_files:
             # Retrieve and save the output file
             if batch.output_file_id:
                 output_content = client.files.content(batch.output_file_id)
-                output_filename = f"calibration_eval_{prompt_type}_{model}_{timestamp}_output.jsonl"
+                output_filename = f"{prompt_type}_{model}_{timestamp}_output.jsonl"
                 output_path = os.path.join(output_dir, output_filename)
                 with open(output_path, "wb") as output_file:
                     output_file.write(output_content.content)

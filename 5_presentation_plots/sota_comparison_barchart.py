@@ -41,4 +41,5 @@ fig.tight_layout()
 
 # Save as SVG
 plt.savefig('sota_barchart.svg', format='svg', dpi=300, bbox_inches='tight')
+plt.savefig('sota_barchart.png', format='svg', dpi=300, bbox_inches='tight')
 plt.show()

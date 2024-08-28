@@ -1,6 +1,5 @@
 from openai import OpenAI
 import os
-import glob
 import re
 
 # Set up OpenAI API credentials
@@ -13,12 +12,28 @@ output_dir = "downloaded_batch_outputs"
 # Create output directory if it doesn't exist
 os.makedirs(output_dir, exist_ok=True)
 
-# Get the 4 most recent txt files
-txt_files = sorted(glob.glob(os.path.join(input_dir, "*.txt")), key=os.path.getmtime, reverse=True)[:4]
+# Read the list of txt files from the provided file
+txt_files = [
+    # "batch_info_0shot_GPT4o_20240621_151649.txt",
+    # "batch_info_0shot_GPT4turbo_20240621_151625.txt",
+    "batch_info_0shot_GPT35Turbo_20240710_194939.txt",
+    "batch_info_0shot_GPT35TurboFinetuned_20240710_194944.txt",
+    # "batch_info_5shot_GPT4o_20240621_151705.txt",
+    # "batch_info_5shot_GPT4turbo_20240621_151642.txt",
+    "batch_info_5shot_GPT35Turbo_20240710_194952.txt",
+    "batch_info_5shot_GPT35TurboFinetuned_20240710_195001.txt",
+]
 
 for txt_file in txt_files:
+    txt_file_path = os.path.join(input_dir, txt_file)
+
+    # Check if the file exists
+    if not os.path.exists(txt_file_path):
+        print(f"File not found: {txt_file_path}")
+        continue
+
     # Read the batch ID from the file
-    with open(txt_file, 'r') as f:
+    with open(txt_file_path, 'r') as f:
         content = f.read()
         batch_id_match = re.search(r'Batch ID: (batch_\w+)', content)
         if not batch_id_match:
@@ -27,13 +42,12 @@ for txt_file in txt_files:
         batch_id = batch_id_match.group(1)
 
     # Extract information for the output filename
-    filename = os.path.basename(txt_file)
-    prompt_type, model, timestamp = re.match(r'batch_info_(\w+)_(\w+)_(\d+_\d+)\.txt', filename).groups()
+    prompt_type, model, timestamp = re.match(r'batch_info_(\w+)_(\w+)_(\d+_\d+)\.txt', txt_file).groups()
 
     try:
         # Retrieve the batch information
         batch = client.batches.retrieve(batch_id)
-        print("\n")
+        print(f"\nProcessing batch: {batch_id}")
 
         # Check if the batch is complete
         if batch.status == "completed":
@@ -57,7 +71,7 @@ for txt_file in txt_files:
             else:
                 print(f"No errors found for batch {batch_id}")
         else:
-            print(f"Batch {batch_id} is not complete yet.")
+            print(f"Batch {batch_id} is not complete yet. Status: {batch.status}")
 
     except Exception as e:
         print(f"Error processing batch {batch_id}: {str(e)}")

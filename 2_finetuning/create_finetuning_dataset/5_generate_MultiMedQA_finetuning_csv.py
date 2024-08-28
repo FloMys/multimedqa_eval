@@ -4,7 +4,7 @@ from collections import Counter
 
 path = "/Users/fmys/Documents/Data/master_thesis/finetuning_data"
 files = ["1_MedQA_US4_dev_train_finetuning.csv",
-         "2_MedMCQA_train_testfinetuning.csv",
+         "2_MedMCQA_train_finetuning.csv",
          "4_MMLU_CT_dev_val_finetuning.csv"]
 
 column_names = ["Question", "Correct Answer", "Correct Answer ID", "Answer Options", "Dataset", "Unique ID",
@@ -28,7 +28,7 @@ with open(os.path.join(path, output_file), 'w', newline='', encoding='utf-8') as
             num_rows = len(rows)
 
             # If it's the MedMCQA dataset, keep only the first 10%
-            if file == "2_MedMCQA_train_testfinetuning.csv":
+            if file == "2_MedMCQA_train_finetuning.csv":
                 num_rows_to_keep = int(num_rows * 0.1)
                 rows = rows[:num_rows_to_keep]
                 num_rows = num_rows_to_keep

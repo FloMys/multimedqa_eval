@@ -1,0 +1,6 @@
+Batch ID: batch_H6PTF1f98YbppPmSzpXDEnWd
+Timestamp: 20240710_134040
+Prompt Type: calibration_0shot
+Model: GPT4o
+Full Batch Object:
+Batch(id='batch_H6PTF1f98YbppPmSzpXDEnWd', completion_window='24h', created_at=1720611640, endpoint='/v1/chat/completions', input_file_id='file-4lSQmsL64I8pCy7vmvRwUBj7', object='batch', status='validating', cancelled_at=None, cancelling_at=None, completed_at=None, error_file_id=None, errors=None, expired_at=None, expires_at=1720698040, failed_at=None, finalizing_at=None, in_progress_at=None, metadata={'description': 'MultiMedQA_calibration_0shot_GPT4o.jsonl'}, output_file_id=None, request_counts=BatchRequestCounts(completed=0, failed=0, total=0))

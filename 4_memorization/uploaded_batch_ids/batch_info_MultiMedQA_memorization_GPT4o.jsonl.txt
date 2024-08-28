@@ -1,0 +1,4 @@
+Batch ID: batch_7ZBQGzWQLTP321A1ou1lSebh
+Timestamp: 20240711_172751
+Full Batch Object:
+Batch(id='batch_7ZBQGzWQLTP321A1ou1lSebh', completion_window='24h', created_at=1720711671, endpoint='/v1/chat/completions', input_file_id='file-0JkSjfllcTQw0Xsh0tdOhCtZ', object='batch', status='validating', cancelled_at=None, cancelling_at=None, completed_at=None, error_file_id=None, errors=None, expired_at=None, expires_at=1720798071, failed_at=None, finalizing_at=None, in_progress_at=None, metadata={'description': 'MultiMedQA_memorization_GPT4o.jsonl'}, output_file_id=None, request_counts=BatchRequestCounts(completed=0, failed=0, total=0))

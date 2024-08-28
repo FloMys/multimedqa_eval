@@ -26,7 +26,7 @@ for file in files:
 
             data.append([question, correct_answer, correct_answer_id, answer_options, dataset, choice_type])
 
-with open('2_MedMCQA_train_testfinetuning.csv', 'w', newline='', encoding='utf-8') as csvfile:
+with open('2_MedMCQA_train_finetuning.csv', 'w', newline='', encoding='utf-8') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['Question', 'Correct Answer', 'Correct Answer ID', 'Answer Options', 'Dataset', 'Choice Type'])
     writer.writerows(data)

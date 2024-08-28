@@ -12,9 +12,8 @@ column_names = [
     "Answer GPT4o 0-shot", "Answer GPT4turbo 0-shot",
     "Answer GPT4o 5-shot", "Answer GPT4turbo 5-shot",
     "Answer Options", "Dataset", "Unique ID", "0-shot Prompt",
-    "5-shot Prompt"
+    "5-shot Prompt", "Calibration Prompt 0-shot GPT4o", "Answer Calibration GPT4o 0-shot"
 ]
-
 
 # Function to read JSONL file
 def read_jsonl(file_path):
@@ -24,10 +23,7 @@ def read_jsonl(file_path):
 
 # Read all JSONL files
 jsonl_files = {
-    "0shot_GPT4o": "0shot_GPT4o_20240621_151649_output.jsonl",
-    "0shot_GPT4turbo": "0shot_GPT4turbo_20240621_151625_output.jsonl",
-    "5shot_GPT4o": "5shot_GPT4o_20240621_151705_output.jsonl",
-    "5shot_GPT4turbo": "5shot_GPT4turbo_20240621_151642_output.jsonl"
+    "calibration_0shot_GPT4o": "calibration_0shot_GPT4o_20240710_134040_output.jsonl"
 }
 
 answer_dicts = {}
@@ -44,10 +40,7 @@ with open(csv_file_path, "r") as csv_file:
 # Update the answer columns based on the custom_id mapping
 for row in rows:
     unique_id = row["Unique ID"]
-    row["Answer GPT4o 0-shot"] = answer_dicts["0shot_GPT4o"].get(unique_id, "")
-    row["Answer GPT4turbo 0-shot"] = answer_dicts["0shot_GPT4turbo"].get(unique_id, "")
-    row["Answer GPT4o 5-shot"] = answer_dicts["5shot_GPT4o"].get(unique_id, "")
-    row["Answer GPT4turbo 5-shot"] = answer_dicts["5shot_GPT4turbo"].get(unique_id, "")
+    row["Answer Calibration GPT4o 0-shot"] = answer_dicts["calibration_0shot_GPT4o"].get(unique_id, "")
 
 # Write the updated rows back to the CSV file
 with open(csv_file_path, "w", newline="") as csv_file:
