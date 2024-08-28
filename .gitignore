@@ -9,3 +9,6 @@
 
 # Ignore SVG files
 *.svg
+
+# Ignore JSONL files
+*.jsonl
