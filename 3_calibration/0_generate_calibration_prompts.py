@@ -1,13 +1,3 @@
-# Prompt:
-# In an evaluation you were given this task and then you gave the answer below.
-# Task:
-# [0-shot Prompt here]
-# Generated answer:
-# [add Answer GPT4o 0-shot here]
-# Please provide your confidence level (as a percentage) that your answer is correct.
-# To do that it is extremely important that you only answer with a number between 0 and 100.
-
-
 import csv
 import os
 
